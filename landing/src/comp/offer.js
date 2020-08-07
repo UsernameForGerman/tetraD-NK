@@ -4,7 +4,7 @@ import scrap from "../images/scpars.png";
 import mac from "../images/mac-2.png";
 import screen from "../images/screen.png";
 
-export default function Offer({handleSubmit}) {
+export default function Offer({handleSubmit, openModal}) {
     let contactsRef = React.createRef();
     return (
     <div className="offer">
@@ -42,6 +42,7 @@ export default function Offer({handleSubmit}) {
                     <li className="promo-case-list-item">Показываем сложное <mark>понятнее</mark></li>
                     <button
                         className="offer-callback-btn"
+                        onClick={openModal}
                     >Обсудить проект</button>
                 </ol>
             </div>
@@ -56,6 +57,7 @@ export default function Offer({handleSubmit}) {
                     <li className="promo-case-list-item">Создаем <mark>понятные</mark> интерфейсы</li>
                     <button
                         className="offer-callback-btn"
+                        onClick={openModal}
                     >Обсудить проект</button>
                 </ol>
             </div>

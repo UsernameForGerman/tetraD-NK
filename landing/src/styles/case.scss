@@ -36,3 +36,16 @@
 .ant-timeline-item-content{
   width: 100% !important;
 }
+
+@media (max-width: 420px) {
+  .case {
+    &-row {
+      flex-direction: column;
+      align-items: center;
+    }
+    &-decs, &-target, &-tasks, &-solution, &-price, &-time{
+      width: 100% !important;
+      margin-bottom: 20px !important;
+    }
+  }
+}

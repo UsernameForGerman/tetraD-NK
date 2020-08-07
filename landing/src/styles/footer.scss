@@ -23,3 +23,18 @@ footer{
     }
   }
 }
+
+@media (max-width: 420px) {
+  footer{
+    flex-direction: column;
+    img, div{
+      margin: 10px 0px;
+    }
+  }
+}
+
+@media (max-height: 400px) {
+  footer{
+    flex-direction: row;
+  }
+}

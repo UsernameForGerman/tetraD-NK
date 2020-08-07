@@ -88,3 +88,44 @@
     }
   }
 }
+
+@media (max-width: 420px), (max-height: 400px) {
+  .promo{
+    flex-direction: column;
+    &-case{
+      width: 100%;
+      height: 40vh;
+      &-list{
+        padding: 0px 0px;
+        transform: none;
+        &-item{
+          display: none;
+        }
+        button{
+          transition: .3s all linear !important;
+          font-size: 18px;
+          transform: translateY(20px) !important;
+        }
+      }
+      &-title{
+        font-size: 24px;
+        transform: translateY(10px) !important;
+      }
+    }
+  }
+}
+
+@media (max-height: 400px) {
+  .promo{
+    flex-direction: row;
+    &-case{
+      height: 80vh;
+      &-title{
+        height: 150px;
+      }
+      &-bck{
+        width: 100%;
+      }
+    }
+  }
+}
