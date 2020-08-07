@@ -22,7 +22,6 @@ export default function Cases() {
                 return (
                     <Link to={`/case/${elem.title.toString().toLowerCase()}`} style={{width: "100%"}}>
                         <div className="offer-case">
-                            //<img src={img.name} className="offer-case-img" alt={"Offer img"}/>
                             <img src={img} className="offer-case-img" alt={"Offer img"}/>
                             <div className="offer-case-main">
                                 <h2 className="offer-case-main-title">{elem.title}</h2>
