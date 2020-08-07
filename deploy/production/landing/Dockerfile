@@ -2,7 +2,7 @@ FROM node:12.18.3-slim as build-stage
 
 WORKDIR /landing
 
-COPY ./landing/package-lock.json /landing/
+COPY ./landing/package.json /landing/
 
 RUN npm i
 
