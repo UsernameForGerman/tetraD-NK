@@ -29,6 +29,7 @@ const Layout = ({ children, title }) => {
             req.send(JSON.stringify({
                 contact : ref.current.value,
             }));
+            req.setRequestHeader('Content-Type', 'application/json');
             message
                 .loading('Отправка контактов..', 1.5)
                 .then(() => message.success('Контакты отправлены', 1.5))
