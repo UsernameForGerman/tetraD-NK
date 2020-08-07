@@ -175,3 +175,18 @@
     }
   }
 }
+
+.nav-icons{
+  color: white;
+  position: absolute;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+  transform: translateY(30vh);
+
+  span{
+    margin: 0px 20px;
+    font-size: 30px;
+  }
+}

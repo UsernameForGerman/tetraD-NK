@@ -17,4 +17,9 @@ footer{
       background-color: $accent-orange;
     }
   }
+  &-info{
+    &-item{
+      color: white;
+    }
+  }
 }

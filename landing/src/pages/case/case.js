@@ -24,7 +24,7 @@ function Case(props) {
     if (!elems) return (<></>);
     const elem = elems.filter(el => el.title.toLowerCase() === title)[0]
     const tasks = elem.tasks.map(task => task.task).filter(task => task !== null && task !== undefined);
-    let document = elem.document[0];
+    let document = elem.document[0] ? elem.document[0] : {};
     let renderedTasks = "";
     if (tasks.length > 0){
         renderedTasks = (
@@ -45,7 +45,7 @@ function Case(props) {
             <div className="case-name">
                 <h1><a href={elem.link}>{elem.title}</a></h1>
                 {document
-                    ? <h4><a href={elem.presentation}>Презентация проекта</a></h4>
+                    ? <h4><a href={document.url}>Презентация проекта</a></h4>
                     : <></>
                 }
             </div>
@@ -54,13 +54,13 @@ function Case(props) {
                     <h2 className="case-desc-title">
                         <InfoOutlined className="icon"/> Описание
                     </h2>
-                    {elem.description}
+                    {elem.desc}
                 </div>
                 <div className="case-target">
                     <h2 className="case-target-title">
                         <AimOutlined className="icon" spin/> Цель
                     </h2>
-                    {elem.goal}
+                    {elem.target}
                 </div>
                 {renderedTasks}
             </div>
@@ -75,11 +75,11 @@ function Case(props) {
                     <h2 className="case-time-title">
                         <ClockCircleOutlined className="icon" /> Время
                     </h2>
-                    {elem.duration}
+                    {elem.time}
                 </div>
                 <div className="case-price">
                     <h2 className="case-time-title">
-                        <DollarCircleOutlined className="icon" /> Стоимость
+                        <DollarCircleOutlined className="icon" /> Цена
                     </h2>
                     {elem.price}
                 </div>

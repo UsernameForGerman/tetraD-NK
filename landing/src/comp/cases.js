@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from "react";
-import { Carousel } from 'antd';
 import 'antd/dist/antd.css';
 import {Link} from 'react-router-dom'
 import fetchCases from "../fetchCases";
+import {Carousel} from "antd";
+import {LeftOutlined, RightOutlined} from '@ant-design/icons';
 
 export default function Cases() {
     const [cases, setCases] = useState([]);
     const [fetching, setFetching] = useState(false);
+    let carousel = React.createRef();
     useEffect(() => {
         if (cases.length === 0 && !fetching){
             fetchCases(
@@ -15,23 +17,28 @@ export default function Cases() {
         }
     })
     return (
-        <Carousel autoplay>
-            {cases ? cases.map(elem => {
-                // let img = elem.img[0];
-                let img = elem.image;
-                return (
-                    <Link to={`/case/${elem.title.toString().toLowerCase()}`} style={{width: "100%"}}>
-                        <div className="offer-case">
-                            <img src={img} className="offer-case-img" alt={"Offer img"}/>
-                            <div className="offer-case-main">
-                                <h2 className="offer-case-main-title">{elem.title}</h2>
-                                <div className="offer-case-main-desc">{elem.description}</div>
-                                <button className="offer-case-main-btn">Читать подробнее</button>
+        <>
+            <div className="nav-icons">
+                <LeftOutlined onClick={() => carousel.prev()} />
+                <RightOutlined onClick={() => carousel.next()} />
+            </div>
+            <Carousel autoplay arrows accessibility ref={node => (carousel = node)}>
+                {cases ? cases.map(elem => {
+                    let img = elem.img[0];
+                    return (
+                        <Link to={`/case/${elem.title.toString().toLowerCase()}`} style={{width: "100%"}}>
+                            <div className="offer-case">
+                                <img src={img.name} className="offer-case-img" alt={"Offer img"}/>
+                                <div className="offer-case-main">
+                                    <h2 className="offer-case-main-title">{elem.title}</h2>
+                                    <div className="offer-case-main-desc">{elem.desc}</div>
+                                    <button className="offer-case-main-btn">Читать подробнее</button>
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                )
-            }) : <></>}
-        </Carousel>
+                        </Link>
+                    )
+                }) : <></>}
+            </Carousel>
+        </>
     )
 }
