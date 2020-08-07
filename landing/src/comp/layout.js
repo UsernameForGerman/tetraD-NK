@@ -7,7 +7,7 @@ import Footer from "./footer";
 import {message, Modal} from "antd";
 import {CMS_URL} from "../getBaseUrl";
 
-const formUrl = CMS_URL + "contacts/";
+const formUrl = CMS_URL + "contact/";
 
 const Layout = ({ children, title }) => {
     const [isOpen, setOpen] = useState(false);
