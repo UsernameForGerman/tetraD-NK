@@ -33,7 +33,7 @@ class Task(models.Model):
 
 class Contact(models.Model):
     created = models.DateTimeField(auto_created=True)
-    contact = models.CharField(max_length=512)
+    contact = models.TextField(max_length=512)
 
     def __str__(self):
         return self.contact
