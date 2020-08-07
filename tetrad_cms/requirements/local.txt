@@ -1,0 +1,4 @@
+-r base.txt
+
+psycopg2==2.8.4 --no-binary psycopg2
+

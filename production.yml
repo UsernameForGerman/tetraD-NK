@@ -1,0 +1,76 @@
+version: "3"
+
+volumes:
+  production_traefik: {}
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./deploy/local/postgres/Dockerfile
+    image: tetrad_local_postgres
+    restart: always
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.envs/.local/.postgres
+
+  landing:
+    build:
+      context: .
+      dockerfile: ./deploy/production/landing/Dockerfile
+    command: ["nginx", "-g", "daemon off;"]
+    image: tetrad-nk_frontend
+    ports:
+      - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.nginx-https-rdrct.redirectscheme.scheme=https"
+      - "traefik.http.routers.nginx-http.middlewares=nginx-https-rdrct"
+      - "traefik.http.routers.nginx-http.rule=Host(`tetradnk.ru`)"
+      - "traefik.http.routers.nginx-http.entrypoints=http"
+      - "traefik.http.routers.nginx-https.rule=Host(`tetradnk.ru`)"
+      - "traefik.http.routers.nginx-https.entrypoints=https"
+      - "traefik.http.routers.nginx-https.tls=true"
+      - "traefik.http.routers.nginx-https.tls.certresolver=default"
+      - "traefik.http.services.nginx-https.loadbalancer.server.port=8000"
+
+  cms:
+    build:
+      context: .
+      dockerfile: ./deploy/production/cms/Dockerfile
+    # command: ["nginx", "-g", ""]
+    image: tetrad-nk_telegram
+    ports:
+      - "1337:1337"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.cms-https-rdrct.redirectscheme.scheme=https"
+      - "traefik.http.routers.cms-http.middlewares=cms-https-rdrct"
+      - "traefik.http.routers.cms-http.rule=Host(`cms.tetradnk.ru`)"
+      - "traefik.http.routers.cms-http.entrypoints=http"
+      - "traefik.http.routers.cms-https.rule=Host(`cms.tetradnk.ru`)"
+      - "traefik.http.routers.cms-https.entrypoints=https"
+      - "traefik.http.routers.cms-https.tls=true"
+      - "traefik.http.routers.cms-https.tls.certresolver=default"
+      - "traefik.http.services.cms-https.loadbalancer.server.port=1337"
+
+  traefik: &traefik
+    build:
+      context: .
+      dockerfile: ./deploy/production/traefik/Dockerfile
+    image: traefik
+    restart: always
+    depends_on:
+      - cms
+    volumes:
+      - production_traefik:/etc/traefik/acme
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"

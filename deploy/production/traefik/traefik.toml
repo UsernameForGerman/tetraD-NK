@@ -1,0 +1,29 @@
+debug = true
+
+logLevel = "DEBUG"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+#    [entryPoints.http.redirect]
+#    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+    [entryPoints.https.http.tls]
+
+[providers.docker]
+defaultRule = "Host(`docker.localhost`)"
+endpoint = "unix:///var/run/docker.sock"
+watch = true
+exposedByDefault = false
+
+[api]
+  insecure = true
+  dashboard = true
+
+[certificatesresolvers.default.acme]
+  email = "polyakgerman@gmail.com"
+  storage = "/etc/traefik/acme/acme.json"
+  [certificatesresolvers.default.acme.httpChallenge]
+    entryPoint = "http"

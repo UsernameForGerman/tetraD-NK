@@ -1,0 +1,38 @@
+.case{
+  min-height: 90vh;
+  &-name{
+    font-size: 32px;
+    text-align: center;
+    a{
+      text-decoration: underline;
+    }
+  }
+  &-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0px;
+    div{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      width: 30%;
+      font-size: 20px;
+    }
+  }
+}
+
+.icon{
+  margin-right: 10px;
+  color: $accent-blue !important;
+}
+
+.ant-timeline-item-head-blue{
+ border-color: $accent-blue !important;
+  width: 10px !important;
+}
+
+.ant-timeline-item-content{
+  width: 100% !important;
+}

@@ -1,0 +1,71 @@
+version: "3"
+
+volumes:
+#  local_traefik: {}
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+services:
+  postgres: &postgres
+    build:
+      context: .
+      dockerfile: ./deploy/local/postgres/Dockerfile
+    image: tetrad_local_postgres
+    restart: always
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.envs/.local/.postgres
+
+  landing: &landing
+    build:
+      context: .
+      dockerfile: ./deploy/local/landing/Dockerfile
+    command: ["nginx", "-g", "daemon off;"]
+    image: tetrad_local_landing
+    ports:
+      - "3000:3000"
+    depends_on:
+      - cms
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.nginx-http.rule=Host(`localhost`)"
+#      - "traefik.http.routers.nginx-http.entrypoints=http"
+#      - "traefik.http.services.nginx-https.loadbalancer.server.port=3000"
+
+  cms: &cms
+    build:
+      context: .
+      dockerfile: ./deploy/local/cms/Dockerfile
+    command: ["/start"]
+    image: tetrad_local_cms
+    depends_on:
+      - postgres
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./.envs/.local/.cms
+      - ./.envs/.local/.postgres
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.cms-http.rule=Host(`localhost`)"
+#      - "traefik.http.routers.cms-http.entrypoints=http"
+#      - "traefik.http.services.cms-https.loadbalancer.server.port=9000"
+#
+#  traefik: &traefik
+#    build:
+#      context: .
+#      dockerfile: ./deploy/production/traefik/Dockerfile
+#    image: traefik
+#    restart: always
+#    depends_on:
+#      - cms
+#    volumes:
+#      - production_traefik:/etc/traefik/acme
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    ports:
+#      - "0.0.0.0:80:80"
+#      - "0.0.0.0:443:443"

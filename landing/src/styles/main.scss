@@ -1,0 +1,71 @@
+@import "./vars.scss";
+@import "./header.scss";
+@import "./footer.scss";
+@import "./offer.scss";
+@import "./promo.scss";
+@import "./case.scss";
+@import "./cta.scss";
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;700&display=swap');
+
+body{
+  font-family: 'Exo 2';
+  margin: 0px 0px;
+  overflow-x: hidden;
+}
+
+button{
+  outline: none;
+  font-size: 16px;
+  border: 1px solid transparent;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px 10px;
+}
+
+main, footer{
+  padding: 20px 5vw;
+}
+
+span{
+  display: block;
+}
+
+input{
+  border-color: transparent;
+  outline: none;
+  border-bottom: 1px solid $accent-black;
+  font-size: 24px;
+}
+
+a{
+  text-decoration: none;
+  color: black !important;
+}
+
+@media (max-width: 420px) {
+  main, footer {
+    padding: 20px 5vw;
+  }
+}
+
+@media (max-height: 420px) {
+  main, footer {
+    padding: 20px 5vw;
+  }
+}
+
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 160px;
+  background: white;
+  overflow: hidden;
+}
+
+.ant-carousel .slick-dots li button{
+  height: 8px !important;
+  background-color: $accent-black !important;
+}
+
