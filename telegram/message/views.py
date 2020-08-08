@@ -15,9 +15,8 @@ class WebhookView(APIView):
     def post(self, *args, **kwargs):
         print(self.request.data)
         try:
-            update = loads(self.request.data)
-            chat_id = update.get('message').get('chat').get('id')
-            text = update.get('message').get('text')
+            chat_id = self.request.data.get('message').get('chat').get('id')
+            text = self.request.data.get('message').get('text')
         except (TypeError, KeyError, AttributeError) as e:
             print(e)
             return Response(e, status=HTTP_400_BAD_REQUEST)
