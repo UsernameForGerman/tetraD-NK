@@ -84,7 +84,7 @@ services:
       - "5000:5000"
     env_file:
       - ./.envs/.local/.telegram
-      - ./.envs/.local/.postgres
+      - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.telegram-https-rdrct.redirectscheme.scheme=https"
