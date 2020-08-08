@@ -26,10 +26,10 @@ const Layout = ({ children, title }) => {
             handleCancel();
             let req = new XMLHttpRequest();
             req.open("POST", formUrl);
+            req.setRequestHeader('Content-Type', 'application/json');
             req.send(JSON.stringify({
                 contact : ref.current.value,
             }));
-            req.setRequestHeader('Content-Type', 'application/json');
             message
                 .loading('Отправка контактов..', 1.5)
                 .then(() => message.success('Контакты отправлены', 1.5))

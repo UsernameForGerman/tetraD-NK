@@ -1,6 +1,8 @@
 version: "3"
 
 volumes:
+  production_media: {}
+  production_static: {}
   production_traefik: {}
   production_postgres_data: {}
   production_postgres_data_backups: {}
@@ -48,6 +50,9 @@ services:
       dockerfile: ./deploy/production/cms/Dockerfile
     command: ["/start"]
     image: tetrad_production_cms
+    volumes:
+      - production_static:/var/tetrad/static
+      - production_media:/var/tetrad/media
     depends_on:
       - postgres
     ports:
