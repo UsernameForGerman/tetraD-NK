@@ -97,6 +97,32 @@ services:
       - "traefik.http.routers.telegram-https.tls.certresolver=default"
       - "traefik.http.services.telegram-https.loadbalancer.server.port=5000"
 
+  celeryworker_cms:
+    <<: *cms
+    image: tetrad_production_cms_celeryworker
+    restart: always
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+    command: /start-celeryworker
+    ports: []
+    labels:
+      - "traefik.enable=false"
+
+  celeryworker_telegram:
+    <<: *telegram
+    image: tetrad_production_telegram_celeryworker
+    restart: always
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+    command: /start-celeryworker
+    ports: []
+    labels:
+      - "traefik.enable=false"
+
   traefik: &traefik
     build:
       context: .
@@ -125,25 +151,3 @@ services:
       - ./.envs/.production/.cms
     ports:
       - "5672"
-
-  celeryworker_cms:
-    <<: *cms
-    image: tetrad_production_cms_celeryworker
-    restart: always
-    depends_on:
-      - redis
-      - rabbit
-      - postgres
-    command: /start-celeryworker
-    ports: []
-
-  celeryworker_telegram:
-    <<: *telegram
-    image: tetrad_production_telegram_celeryworker
-    restart: always
-    depends_on:
-      - redis
-      - rabbit
-      - postgres
-    command: /start-celeryworker
-    ports: []
