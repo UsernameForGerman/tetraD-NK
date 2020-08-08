@@ -1,0 +1,29 @@
+# General
+# ----------------------------------------------------------------------------
+USE_DOCKER=yes
+
+# Django
+# ----------------------------------------------------------------------------
+DEBUG=True
+SECRET_KEY=4p%%!xqgu4-8%4jfoa&gm_59zt-=pusc_b6+cq7a$i_9!qo-$!
+DJANGO_SETTINGS_MODULE=config.local
+ALLOWED_HOSTS="localhost 0.0.0.0 telegram"
+
+# Redis
+# ----------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# RabbitMQ
+# ----------------------------------------------------------------------------
+RABBITMQ_DEFAULT_USER=guest
+RABBITMQ_DEFAULT_PASS=guest
+RABBITMQ_DEFAULT_VHOST=/
+
+# Celery
+# ----------------------------------------------------------------------------
+CELERY_BROKER_URL=amqp://guest:guest@rabbit:5672
+
+# Flower
+CELERY_FLOWER_USER=wJRDVUpEiebpiNKSEnwwRYvkgEeyigRo
+CELERY_FLOWER_PASSWORD=aVeWnRNYnnFfDXfcyzXXkHHBJShQwCWoHjDoAjCGonZNXhfTCbALJTlMVzXdhnzS
+
