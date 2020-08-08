@@ -16,7 +16,7 @@ class SendContactsView(APIView):
             admins = [admin.get('chat_id', '') for admin in self.request.data.get('admins')]
             print(contact)
             print(admins)
-        except KeyError as e:
+        except (KeyError, AttributeError) as e:
             return Response(e, status=HTTP_400_BAD_REQUEST)
 
         data_to_send = self.template.format(

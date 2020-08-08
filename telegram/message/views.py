@@ -11,6 +11,7 @@ class WebhookView(APIView):
     permission_classes = (TelegramUserPermission, )
 
     def post(self, *args, **kwargs):
+        print('new message')
         try:
             chat_id = self.request.data.get('message').get('chat').get('id')
             text = self.request.data.get('message').get('text')
