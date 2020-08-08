@@ -11,4 +11,6 @@ def send_new_contact_to_admins(sender, instance, **kwargs):
     admins = Admin.objects.all()
     admins_chat_id = AdminSerializer(admins, many=True).data
     contact = ContactSerializer(instance, many=False).data
+
+    print('sending from cms {} {}'.format(admins_chat_id, contact))
     send_contact.delay(contact, admins_chat_id)
