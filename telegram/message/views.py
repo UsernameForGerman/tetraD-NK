@@ -11,13 +11,13 @@ class WebhookView(APIView):
     permission_classes = (TelegramUserPermission, )
 
     def post(self, *args, **kwargs):
-        print('new message')
         try:
             chat_id = self.request.data.get('message').get('chat').get('id')
             text = self.request.data.get('message').get('text')
         except (TypeError, KeyError, AttributeError) as e:
             return Response(e, status=HTTP_400_BAD_REQUEST)
 
+        print(chat_id)
         s = Session()
         url = "{}bot{}/sendMessage".format(settings.TELEGRAM_URL, settings.TELEGRAM_TOKEN)
 

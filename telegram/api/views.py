@@ -12,12 +12,8 @@ class SendContactsView(APIView):
 
     def post(self, *args, **kwargs):
         try:
-            print(self.request.data)
-            print(self.request.POST)
             contact = self.request.data.get('contact').get('contact')
             admins = [admin.get('chat_id', '') for admin in self.request.data.get('admins')]
-            print(contact)
-            print(admins)
         except (KeyError, AttributeError) as e:
             return Response(e, status=HTTP_400_BAD_REQUEST)
 
@@ -25,8 +21,6 @@ class SendContactsView(APIView):
             host=self.request.META.get('HTTP_HOST', 'Unknown'),
             contact=contact
         )
-
-        print(data_to_send)
 
         for admin in admins:
             send_message.delay(admin, data_to_send)
