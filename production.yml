@@ -83,7 +83,7 @@ services:
     ports:
       - "5000:5000"
     env_file:
-      - ./.envs/.local/.telegram
+      - ./.envs/.production/.telegram
       - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=true"
