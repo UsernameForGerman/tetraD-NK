@@ -9,37 +9,33 @@ RUN apt-get update -y \
   # for Django translations
   # && apt-get install gettext -y
 
-RUN addgroup --system django \
-    && adduser --system --group django --shell /bin/sh
+RUN addgroup --system telegram \
+    && adduser --system --group telegram --shell /bin/sh
 
-WORKDIR /home/django/
+WORKDIR /home/telegram/
 
-RUN mkdir -p  /home/django/app/
-RUN mkdir -p  /home/django/app/static
-RUN mkdir -p  /home/django/app/media
-
-RUN mkdir -p  /var/tetrad/static/
-RUN mkdir -p  /var/tetrad/media/
+RUN mkdir -p  /var/telegram/static/
+RUN mkdir -p  /var/telegram/media/
 
 # Requirements are installed here to ensure they will be cached.
-COPY ./tetrad_cms/requirements /requirements
+COPY ./telegram/requirements /requirements
 RUN pip install --no-cache-dir -r /requirements/production.txt \
     && rm -rf /requirements
 
-COPY ./deploy/production/cms/entrypoint /entrypoint
+COPY ./deploy/production/telegram/entrypoint /entrypoint
 RUN sed -i 's/\r//' /entrypoint
 RUN chmod +x /entrypoint
-RUN chown django /entrypoint
+RUN chown telegram /entrypoint
 
-COPY ./deploy/production/cms/start /start
+COPY ./deploy/production/telegram/start /start
 RUN sed -i 's/\r//' /start
 RUN chmod +x /start
-RUN chown django /start
+RUN chown telegram /start
 
-COPY ./deploy/production/cms/celery/worker/start /start-celeryworker
+COPY ./deploy/production/telegram/celery/worker/start /start-celeryworker
 RUN sed -i 's/\r//' /start-celeryworker
 RUN chmod +x /start-celeryworker
-RUN chown django /start-celeryworker
+RUN chown telegram /start-celeryworker
 
 #COPY ./deploy/production/cms/celery/beat/start /start-celerybeat
 #RUN sed -i 's/\r//' /start-celerybeat
@@ -49,11 +45,11 @@ RUN chown django /start-celeryworker
 #COPY ./deploy/production/cms/celery/flower/start /start-flower
 #RUN sed -i 's/\r//' /start-flower
 #RUN chmod +x /start-flower
-COPY ./tetrad_cms /app
+COPY ./telegram /telegram
 
-RUN chown -R django /app
-RUN chown -R django /var/tetrad/static
-RUN chown -R django /var/tetrad/media
+RUN chown -R django /telegram
+RUN chown -R django /var/telegram/static
+RUN chown -R django /var/telegram/media
 # RUN chown -R django:django /home/django/
 # RUN chown -R django:django /var/komax_site
 # RUN mkdir /var/komax_site/admin
@@ -61,8 +57,8 @@ RUN chown -R django /var/tetrad/media
 # RUN chmod +x /app/static
 # RUN chmod +x /var/komax_site
 
-USER django
+USER telegram
 
-WORKDIR /app
+WORKDIR /telegram
 
 ENTRYPOINT ["/entrypoint"]

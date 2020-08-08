@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 # local
-from .models import Case, Task, Contact
+from .models import Case, Task, Contact, Admin
 
 class TaskSerializer(ModelSerializer):
     class Meta:
@@ -21,4 +21,20 @@ class CaseSerializer(ModelSerializer):
 class ContactSerializer(ModelSerializer):
     class Meta:
         model = Contact
-        exclude = ('created', )
+        fields = ('contact', )
+
+class AdminSerializer(ModelSerializer):
+    chat_id = SerializerMethodField()
+
+    class Meta:
+        model = Admin
+        fields = ('chat_id', )
+
+    def get_chat_id(self, admin):
+        chat_id = admin.chat_id
+        try:
+            return int(chat_id)
+        except ValueError:
+            pass
+
+        return chat_id
