@@ -32,7 +32,7 @@ class Task(models.Model):
         return "{} <- {}".format(self.case.title, self.task)
 
 class Contact(models.Model):
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     contact = models.TextField(max_length=512)
 
     def __str__(self):
