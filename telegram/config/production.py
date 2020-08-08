@@ -33,8 +33,8 @@ DATABASES = {
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = '/var/tetrad/media/'
-STATIC_ROOT = '/var/tetrad/static/'
+MEDIA_ROOT = '/var/telegram/media/'
+STATIC_ROOT = '/var/telegram/static/'
 
 # MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 # STATIC_ROOT = os.path.join(DATA_DIR, 'static')
