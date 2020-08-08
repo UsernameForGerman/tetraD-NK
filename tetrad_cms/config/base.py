@@ -152,9 +152,9 @@ INSTALLED_APPS = [
     'djangocms_googlemap',
     'djangocms_video',
     'rest_framework',
-    'core',
-    'cases',
     'corsheaders',
+    'core',
+    'cases.apps.CasesConfig',
 ]
 
 LANGUAGES = (
