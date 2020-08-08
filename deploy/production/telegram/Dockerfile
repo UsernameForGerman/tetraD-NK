@@ -14,8 +14,11 @@ RUN addgroup --system telegram \
 
 WORKDIR /home/telegram/
 
-RUN mkdir -p  /var/telegram/static/
-RUN mkdir -p  /var/telegram/media/
+RUN mkdir -p /telegram
+RUN mkdir -p /telegram/static
+RUN mkdir -p /telegram/media
+RUN mkdir -p /var/telegram/static/
+RUN mkdir -p /var/telegram/media/
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./telegram/requirements /requirements
