@@ -4,7 +4,7 @@ from requests import Session
 
 from core.celery import app
 
-@app.task
+@app.task(queue='cms')
 def send_new_contact_to_admins(contact: dict, admins: list) -> None:
     s = Session()
     print('sending from cms {} {}'.format(admins, contact))
