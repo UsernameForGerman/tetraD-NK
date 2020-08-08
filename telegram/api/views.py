@@ -12,6 +12,8 @@ class SendContactsView(APIView):
 
     def post(self, *args, **kwargs):
         try:
+            print(self.request.data)
+            print(self.request.POST)
             contact = self.request.data.get('contact').get('contact')
             admins = [admin.get('chat_id', '') for admin in self.request.data.get('admins')]
             print(contact)

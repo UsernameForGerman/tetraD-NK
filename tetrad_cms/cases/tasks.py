@@ -4,7 +4,7 @@ from requests import Session
 
 from core.celery import app
 
-TELEGRAM_BOT_API_URL='http://telegram:5000/'
+TELEGRAM_BOT_API_URL = 'http://telegram:5000/'
 
 if settings.TELEGRAM_BOT_API_URL:
     print('Env telegram bot api url')
