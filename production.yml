@@ -75,7 +75,7 @@ services:
   telegram: &telegram
     build:
       context: .
-      dockerfile: ./deploy/local/telegram/Dockerfile
+      dockerfile: ./deploy/production/telegram/Dockerfile
     command: ["/start"]
     image: tetrad_local_telegram
     depends_on:
@@ -97,6 +97,32 @@ services:
       - "traefik.http.routers.telegram-https.tls.certresolver=default"
       - "traefik.http.services.telegram-https.loadbalancer.server.port=5000"
 
+  celeryworker_cms:
+    <<: *cms
+    image: tetrad_production_cms_celeryworker
+    restart: always
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+    command: /start-celeryworker
+    ports: []
+    labels:
+      - "traefik.enable=false"
+
+  celeryworker_telegram:
+    <<: *telegram
+    image: tetrad_production_telegram_celeryworker
+    restart: always
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+    command: /start-celeryworker
+    ports: []
+    labels:
+      - "traefik.enable=false"
+
   traefik: &traefik
     build:
       context: .
@@ -111,3 +137,17 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
+
+  redis:
+    image: redis:3.2
+    restart: always
+    ports:
+      - "6379"
+
+  rabbit:
+    image: rabbitmq:3.8-alpine
+    restart: always
+    env_file:
+      - ./.envs/.production/.cms
+    ports:
+      - "5672"

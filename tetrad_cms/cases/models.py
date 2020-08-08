@@ -44,4 +44,11 @@ class CasePluginModel(CMSPlugin):
     def __str__(self):
         return self.case.title
 
+class Admin(models.Model):
+    chat_id = models.CharField(max_length=256, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.chat_id
+
+
 

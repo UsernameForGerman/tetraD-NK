@@ -1,7 +1,7 @@
-from rest_framework import permissions
+from rest_framework.permissions import BasePermission
 from django.conf import settings
 
-class TelegramUserPermission(permissions.BasePermission):
+class TelegramUserPermission(BasePermission):
     """
     Global permission check for telegram token.
     """

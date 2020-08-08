@@ -64,6 +64,42 @@ services:
       - ./.envs/.local/.telegram
       - ./.envs/.local/.postgres
 
+  redis:
+    image: redis:3.2
+    restart: always
+    ports:
+      - "6379"
+
+  rabbit:
+    image: rabbitmq:3.8-alpine
+    restart: always
+    env_file:
+      - ./.envs/.local/.cms
+    ports:
+      - "5672"
+
+  celeryworker_cms:
+    <<: *cms
+    image: tetrad_local_cms_celeryworker
+    restart: always
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+    command: /start-celeryworker
+    ports: []
+
+  celeryworker_telegram:
+    <<: *telegram
+    image: tetrad_local_telegram_celeryworker
+    restart: always
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+    command: /start-celeryworker
+    ports: []
+
 #    labels:
 #      - "traefik.enable=true"
 #      - "traefik.http.routers.cms-http.rule=Host(`localhost`)"

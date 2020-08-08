@@ -1,3 +1,5 @@
 Django==3.0.9
 djangorestframework
-requests
+django-redis
+celery==4.4.5
+requests==2.24.0

@@ -2,7 +2,7 @@ from .base import *
 
 # GENERAL
 # ------------------------------------------------------------------------------
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', ' ').split(' ')
 
 # REST FRAMEWORK
 # ------------------------------------------------------------------------------

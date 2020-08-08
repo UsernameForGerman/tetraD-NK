@@ -22,3 +22,6 @@ pytz
 
 djangorestframework
 django-cors-headers==3.3.0
+celery==4.4.5
+django-redis
+requests==2.24.0
