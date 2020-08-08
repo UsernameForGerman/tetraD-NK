@@ -50,9 +50,9 @@ RUN chown telegram /start-celeryworker
 #RUN chmod +x /start-flower
 COPY ./telegram /telegram
 
-RUN chown -R django /telegram
-RUN chown -R django /var/telegram/static
-RUN chown -R django /var/telegram/media
+RUN chown -R telegram /telegram
+RUN chown -R telegram /var/telegram/static
+RUN chown -R telegram /var/telegram/media
 # RUN chown -R django:django /home/django/
 # RUN chown -R django:django /var/komax_site
 # RUN mkdir /var/komax_site/admin
