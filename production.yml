@@ -75,7 +75,7 @@ services:
   telegram: &telegram
     build:
       context: .
-      dockerfile: ./deploy/local/telegram/Dockerfile
+      dockerfile: ./deploy/production/telegram/Dockerfile
     command: ["/start"]
     image: tetrad_local_telegram
     depends_on:
