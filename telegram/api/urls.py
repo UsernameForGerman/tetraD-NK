@@ -3,8 +3,8 @@ from django.conf import settings
 
 import os
 
-from .views import WebhookView
+from .views import SendContactsView
 
 urlpatterns = [
-    path('<str:token>', WebhookView.as_view(), name='webhook-view'),
+    path('send/contact', SendContactsView.as_view(), name='webhook-view'),
 ]
