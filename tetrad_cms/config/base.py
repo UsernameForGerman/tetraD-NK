@@ -120,7 +120,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
-    'django.contrib.messages',
+    'django.contrib.message',
     'cms',
     'menus',
     'sekizai',

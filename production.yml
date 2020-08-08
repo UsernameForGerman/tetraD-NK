@@ -72,6 +72,31 @@ services:
       - "traefik.http.routers.cms-https.tls.certresolver=default"
       - "traefik.http.services.cms-https.loadbalancer.server.port=9000"
 
+  telegram: &telegram
+    build:
+      context: .
+      dockerfile: ./deploy/local/telegram/Dockerfile
+    command: ["/start"]
+    image: tetrad_local_telegram
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.envs/.local/.telegram
+      - ./.envs/.local/.postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.telegram-https-rdrct.redirectscheme.scheme=https"
+      - "traefik.http.routers.telegram-http.middlewares=telegram-https-rdrct"
+      - "traefik.http.routers.telegram-http.rule=Host(`telegram.tetradnk.ru`)"
+      - "traefik.http.routers.telegram-http.entrypoints=http"
+      - "traefik.http.routers.telegram-https.rule=Host(`telegram.tetradnk.ru`)"
+      - "traefik.http.routers.telegram-https.entrypoints=https"
+      - "traefik.http.routers.telegram-https.tls=true"
+      - "traefik.http.routers.telegram-https.tls.certresolver=default"
+      - "traefik.http.services.telegram-https.loadbalancer.server.port=5000"
+
   traefik: &traefik
     build:
       context: .

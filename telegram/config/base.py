@@ -39,13 +39,15 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
-
+    'message.apps.MessageConfig',
 ]
+
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,7 +112,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
+# Telegram
+# ------------------------------------------------------------------------------
+TELEGRAM_URL = 'https://api.telegram.org/'
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")

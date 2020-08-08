@@ -49,6 +49,21 @@ services:
     env_file:
       - ./.envs/.local/.cms
       - ./.envs/.local/.postgres
+
+  telegram: &telegram
+    build:
+      context: .
+      dockerfile: ./deploy/local/telegram/Dockerfile
+    command: ["/start"]
+    image: tetrad_local_telegram
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.envs/.local/.telegram
+      - ./.envs/.local/.postgres
+
 #    labels:
 #      - "traefik.enable=true"
 #      - "traefik.http.routers.cms-http.rule=Host(`localhost`)"
