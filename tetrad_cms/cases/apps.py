@@ -6,3 +6,4 @@ class CasesConfig(AppConfig):
 
     def ready(self):
         from . import signals
+        print('signals import successfully')
