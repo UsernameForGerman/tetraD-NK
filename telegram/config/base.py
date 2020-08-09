@@ -113,7 +113,7 @@ USE_TZ = True
 
 # Telegram
 # ------------------------------------------------------------------------------
-TELEGRAM_URL = 'https://api.telegram.org/'
+TELEGRAM_URL = os.environ.get('TELEGRAM_URL')
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 
 # Celery
