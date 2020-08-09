@@ -23,7 +23,7 @@ class SendContactsView(APIView):
         )
 
         for admin in admins:
-            send_message.delay(kwargs={'chat_id': admin, 'text': data_to_send})
+            send_message.delay(admin, data_to_send)
 
         return Response(status=HTTP_200_OK)
 
