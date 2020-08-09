@@ -38,5 +38,11 @@
 }
 
 .slick-slide{
-  min-height: 60vh !important;
+  min-height: 40vh !important;
+}
+
+@media (min-width: 430px) {
+  .slick-slide{
+    min-height: 60vh !important;
+  }
 }
