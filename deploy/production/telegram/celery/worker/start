@@ -7,4 +7,4 @@ set -o nounset
 
 #celery -A core.celery worker -l INFO  -c 4 -Q telegram
 #celery -A core.celery worker -l INFO  -c 4 -Q cms_api
-celery multi start 3 -A core.celery -c 4 -l INFO -Q:1,2 telegram -Q:3 cms_api -Q default -L:1,2 DEBUG
+celery multi start 3 -A core.celery -c 4 -l INFO -Q:1,2 telegram -Q:3 cms_api
