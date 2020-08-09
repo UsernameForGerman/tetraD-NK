@@ -24,6 +24,4 @@ COPY --from=build-stage /landing/build /www/build
 RUN rm /etc/nginx/conf.d/*
 COPY ./deploy/local/landing/landing.conf /etc/nginx/conf.d/
 
-# Certbot
-COPY /etc/letsencrypt/ /etc/letsencrypt/
 
