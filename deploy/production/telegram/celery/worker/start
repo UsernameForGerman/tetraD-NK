@@ -6,3 +6,4 @@ set -o nounset
 
 
 celery -A core.celery worker -l INFO  -c 4 -Q telegram
+celery -A core.celery worker -l INFO  -c 4 -Q cms_api

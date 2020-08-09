@@ -8,7 +8,7 @@ from requests import Session
 from .tasks import send_message
 
 class SendContactsView(APIView):
-    template = "New contact info send to you from {host}!\nContact info: {contact}"
+    template = "New contact info send to you from {from_host}!\nContact info: {contact}"
 
     def post(self, *args, **kwargs):
         try:
@@ -18,12 +18,12 @@ class SendContactsView(APIView):
             return Response(e, status=HTTP_400_BAD_REQUEST)
 
         data_to_send = self.template.format(
-            host=self.request.META.get('HTTP_HOST', 'Unknown'),
+            from_host='cms.tetradnk.ru',
             contact=contact
         )
 
         for admin in admins:
-            send_message.delay(admin, data_to_send)
+            send_message.apply_async(kwargs={'chat_id': admin, 'text': data_to_send})
 
         return Response(status=HTTP_200_OK)
 

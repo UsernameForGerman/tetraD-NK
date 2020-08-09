@@ -110,6 +110,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# CMS
+# ------------------------------------------------------------------------------
+CMS_URL = os.environ.get('CMS_URL')
 
 # Telegram
 # ------------------------------------------------------------------------------
@@ -140,7 +143,8 @@ CELERYD_TASK_TIME_LIMIT = 5 * 60
 # TODO: set to whatever value is adequate in your circumstances
 CELERYD_TASK_SOFT_TIME_LIMIT = 60
 # CELERY_IGNORE_RESULT = True
-CELERYD_MAX_TASKS_PER_CHILD = 10
+CELERYD_MAX_TASKS_PER_CHILD = 100
 CELERY_ROUTES = {
-    'api.tasks.*': {'queue': 'telegram'}
+    'api.tasks.send_message': {'queue': 'telegram'},
+    'api.tasks.register_new_admin_chat_id': {'queue': 'cms_api'}
 }

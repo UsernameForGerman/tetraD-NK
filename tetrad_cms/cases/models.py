@@ -45,10 +45,12 @@ class CasePluginModel(CMSPlugin):
         return self.case.title
 
 class Admin(models.Model):
-    chat_id = models.CharField(max_length=256, unique=True, db_index=True)
+    chat_id = models.CharField(max_length=256, blank=True, null=True)
+    username = models.CharField(max_length=128)
+    password = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.chat_id
+        return self.chat_id + ' ' + self.username + ' ' + self.password
 
 
 
