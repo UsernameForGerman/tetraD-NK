@@ -14,7 +14,7 @@ def send_message(chat_id, text='') -> None:
 @app.task(queue='cms_api')
 def register_new_admin_chat_id(chat_id, username='', password='') -> None:
     s = Session()
-    url = '{url}auth'.format(url=settings.CMS_URL)
+    url = '{url}register/admin'.format(url=settings.CMS_URL)
     data = {'chat_id': chat_id, 'username': username, 'password': password}
     try:
         response = s.post(url, data=dumps(data), headers={'Content-Type': 'application/json'})

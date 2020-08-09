@@ -11,6 +11,6 @@ router.register('cases', CaseViewSet)
 router.register('contact', ContactViewSet)
 
 urlpatterns = [
-    path('register/admin/', AdminRegisterView.as_view(), name='register-admin'),
+    path('register/admin', AdminRegisterView.as_view(), name='register-admin'),
     url(r'^', include(router.urls))
 ]
