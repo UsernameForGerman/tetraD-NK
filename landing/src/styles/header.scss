@@ -3,6 +3,7 @@ header{
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  overflow-x: hidden;
   background-color: white;
   box-shadow: 3px 3px 10px $accent-black;
   color: $accent-black;
@@ -70,8 +71,9 @@ header{
     }
 
     &-button{
-      margin-right: 20px;
+      margin: 10px 0px;
       font-size: 13px;
+      transform: translateX(-10vw);
     }
   }
 }
@@ -83,7 +85,6 @@ header{
     }
 
     &-button{
-      margin-right: 20px;
       font-size: 12px;
     }
   }
