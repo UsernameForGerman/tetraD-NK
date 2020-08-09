@@ -57,8 +57,8 @@ RUN chown -R telegram /var/telegram/media
 # RUN chmod +x /app/static
 # RUN chmod +x /var/komax_site
 
-RUN chmod -R telegram /var/run/celery
-RUN chmod -R telegram /var/log/celery
+RUN chown -R telegram /var/run/celery/
+RUN chown -R telegram /var/log/celery/
 
 USER telegram
 
