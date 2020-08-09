@@ -112,7 +112,10 @@ services:
       - "traefik.http.services.telegram-https.loadbalancer.server.port=5000"
 
   celeryworker_cms:
-    <<: *cms
+#    <<: *cms
+    build:
+      context: .
+      dockerfile: ./deploy/production/cms/Dockerfile
     image: tetrad_production_cms_celeryworker
     restart: always
     depends_on:
@@ -122,6 +125,9 @@ services:
       - cms
     command: /start-celeryworker
     ports: []
+    env_file:
+      - ./.envs/.production/.cms
+      - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=false"
 
