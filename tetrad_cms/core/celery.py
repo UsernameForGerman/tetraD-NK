@@ -16,7 +16,9 @@ app = Celery("cms")
 # pickle the object when using Windows.
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
-app.config_from_object("django.conf:settings", namespace="CELERY")
+# app.config_from_object("django.conf:settings", namespace="CELERY")
+# app.config_from_object("django.conf:settings")
+app.config_from_object("DJANGO_SETTINGS_MODULE")
 app.autodiscover_tasks()
 
 # class CeleryAppConfig(AppConfig):
