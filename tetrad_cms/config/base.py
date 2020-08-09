@@ -152,9 +152,9 @@ INSTALLED_APPS = [
     'djangocms_googlemap',
     'djangocms_video',
     'rest_framework',
-    'core',
-    'cases',
     'corsheaders',
+    'core',
+    'cases.apps.CasesConfig',
 ]
 
 LANGUAGES = (
@@ -227,3 +227,6 @@ CELERYD_TASK_TIME_LIMIT = 5 * 60
 CELERYD_TASK_SOFT_TIME_LIMIT = 60
 CELERY_IGNORE_RESULT = True
 CELERYD_MAX_TASKS_PER_CHILD = 10
+CELERY_ROUTES = {
+    'api.tasks.*': {'queue': 'cms'}
+}

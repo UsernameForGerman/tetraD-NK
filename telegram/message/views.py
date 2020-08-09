@@ -17,6 +17,7 @@ class WebhookView(APIView):
         except (TypeError, KeyError, AttributeError) as e:
             return Response(e, status=HTTP_400_BAD_REQUEST)
 
+        print(chat_id)
         s = Session()
         url = "{}bot{}/sendMessage".format(settings.TELEGRAM_URL, settings.TELEGRAM_TOKEN)
 

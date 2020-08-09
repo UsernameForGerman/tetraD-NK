@@ -107,6 +107,9 @@ services:
       - postgres
     command: /start-celeryworker
     ports: []
+    env_file:
+      - ./.envs/.production/.cms
+      - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=false"
 
@@ -120,6 +123,9 @@ services:
       - postgres
     command: /start-celeryworker
     ports: []
+    env_file:
+      - ./.envs/.production/.telegram
+      - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=false"
 

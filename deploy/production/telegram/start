@@ -8,5 +8,6 @@ set -o nounset
 
 python /telegram/manage.py migrate --noinput
 python /telegram/manage.py collectstatic --noinput
-gunicorn core.wsgi --bind 0.0.0.0:5000 --chdir=/telegram
+# gunicorn core.wsgi --bind 0.0.0.0:5000 --chdir=/telegram
+python /telegram/manage.py runserver 0.0.0.0:5000
 
