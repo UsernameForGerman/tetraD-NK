@@ -38,16 +38,22 @@
 }
 
 .slick-slide{
-  min-height: 25vh !important;
+  min-height: 45vh !important;
 }
 
-@media (min-width: 430px) {
+@media (max-width: 1025px) {
   .slick-slide{
     min-height: 25vh !important;
   }
 }
 
-@media (max-width: 1025px) {
+@media (min-width: 1027px) {
+  .slick-slide{
+    min-height: 45vh !important;
+  }
+}
+
+@media (max-width: 430px) {
   .slick-slide{
     min-height: 25vh !important;
   }
