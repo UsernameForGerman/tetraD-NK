@@ -43,7 +43,9 @@ function Case(props) {
     return (<Layout title={elem.title}>
         <div className="case">
             <div className="case-name">
-                <h1><a href={elem.link}>{elem.title}</a></h1>
+                <a href={elem.link}>
+                    <img className="case-name-logo" src={elem.image} alt="logo"/>
+                </a>
                 {document
                     ? <h4><a href={elem.presentation}>Презентация проекта</a></h4>
                     : <></>

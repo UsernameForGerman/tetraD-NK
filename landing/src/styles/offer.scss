@@ -188,6 +188,9 @@
     &-case{
       &-main{
         padding: 0px 50px;
+        &-desc{
+          display: none;
+        }
       }
       &-img{
         width: 100%;
@@ -215,7 +218,9 @@
     &-case{
       min-height: 100vh;
       &-main{
+        &-desc{
 
+        }
       }
     }
   }
@@ -234,7 +239,7 @@
     &-case{
       &-main{
         &-btn{
-          height: 9%;
+          height: 13%;
         }
       }
     }
