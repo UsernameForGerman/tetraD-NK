@@ -13,7 +13,7 @@ RUN npm run build
 RUN ls
 RUN ls /landing/public
 
-FROM nginx:alpine
+FROM nginx:1.19
 
 WORKDIR /www
 
