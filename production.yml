@@ -8,6 +8,20 @@ volumes:
   production_postgres_data_backups: {}
 
 services:
+  redis:
+    image: redis:3.2
+    restart: always
+    ports:
+      - "6379"
+
+  rabbit:
+    image: rabbitmq:3.8-alpine
+    restart: always
+    env_file:
+      - ./.envs/.production/.cms
+    ports:
+      - "5672"
+
   postgres: &postgres
     build:
       context: .
@@ -105,11 +119,9 @@ services:
       - redis
       - rabbit
       - postgres
+      - cms
     command: /start-celeryworker
     ports: []
-    env_file:
-      - ./.envs/.production/.cms
-      - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=false"
 
@@ -121,11 +133,9 @@ services:
       - redis
       - rabbit
       - postgres
+      - telegram
     command: /start-celeryworker
     ports: []
-    env_file:
-      - ./.envs/.production/.telegram
-      - ./.envs/.production/.postgres
     labels:
       - "traefik.enable=false"
 
@@ -143,17 +153,3 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
-
-  redis:
-    image: redis:3.2
-    restart: always
-    ports:
-      - "6379"
-
-  rabbit:
-    image: rabbitmq:3.8-alpine
-    restart: always
-    env_file:
-      - ./.envs/.production/.cms
-    ports:
-      - "5672"
