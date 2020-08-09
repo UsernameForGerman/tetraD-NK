@@ -6,6 +6,7 @@ from django.conf import settings
 from requests import Session
 
 from .permissions import TelegramUserPermission
+from api.tasks import send_message
 
 class WebhookView(APIView):
     permission_classes = (TelegramUserPermission, )
@@ -15,18 +16,11 @@ class WebhookView(APIView):
             chat_id = self.request.data.get('message').get('chat').get('id')
             text = self.request.data.get('message').get('text')
         except (TypeError, KeyError, AttributeError) as e:
-            return Response(e, status=HTTP_400_BAD_REQUEST)
+            return Response(str(e), status=HTTP_400_BAD_REQUEST)
 
         print(chat_id)
-        s = Session()
-        url = "{}bot{}/sendMessage".format(settings.TELEGRAM_URL, settings.TELEGRAM_TOKEN)
 
-        data = {
-            'chat_id': chat_id,
-            'text': text,
-        }
-
-        response = s.post(url, data=data)
+        send_message.delay(chat_id, text)
 
         return Response(status=HTTP_200_OK)
 
