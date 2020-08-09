@@ -200,7 +200,7 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters'
 )
 
-TELEGRAM_BOT_API_URL = os.environ.get('TELEGRAM_BOT_API_URL')
+TELEGRAM_BOT_API_URL = os.environ.get('TELEGRAM_BOT_API_URL', "Telegram bot api url")
 
 # Celery
 # ------------------------------------------------------------------------------
