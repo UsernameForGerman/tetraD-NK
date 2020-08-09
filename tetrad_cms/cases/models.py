@@ -50,7 +50,10 @@ class Admin(models.Model):
     password = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.chat_id + ' ' + self.username + ' ' + self.password
+        if self.chat_id:
+            return self.chat_id + ' ' + self.username + ' ' + self.password
+        else:
+            return '<chat_id>' + ' ' + self.username + ' ' + self.password
 
 
 
