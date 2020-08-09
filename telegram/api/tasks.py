@@ -19,12 +19,12 @@ def register_new_admin_chat_id(chat_id, username='', password='') -> None:
     try:
         response = s.post(url, data=dumps(data), headers={'Content-Type': 'application/json'})
     except BaseException as e:
-        send_message.apply_async(kwargs={'chat_id': chat_id, 'text': 'We are sorry, tetradnk.ru unavailable :('})
+        send_message.delay(kwargs={'chat_id': chat_id, 'text': 'We are sorry, tetradnk.ru unavailable :('})
         return
 
     if response.status_code == 403:
-        send_message.apply_async(kwargs={'chat_id': chat_id, 'text': 'You are not registered as admin'})
+        send_message.delay(kwargs={'chat_id': chat_id, 'text': 'You are not registered as admin'})
     elif response.status_code == 200:
-        send_message.apply_async(kwargs={'chat_id': chat_id, 'text': response.text})
+        send_message.delay(kwargs={'chat_id': chat_id, 'text': response.text})
     else:
-        send_message.apply_async(kwargs={'chat_id': chat_id, 'text': 'Some server errors occured. Sorry :('})
+        send_message.delay(kwargs={'chat_id': chat_id, 'text': 'Some server errors occured. Sorry :('})

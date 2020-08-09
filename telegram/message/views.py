@@ -20,19 +20,19 @@ class WebhookView(APIView):
 
         if text == '/admin':
             text = 'Write your password in this template:\nPassword : my_password'
-            send_message.apply_async(kwargs={'chat_id': chat_id, 'text': text})
+            send_message.delay(kwargs={'chat_id': chat_id, 'text': text})
         elif 'Password : ' in text:
             try:
                 username = self.request.data.get('message').get('chat').get('username')
             except (TypeError, KeyError, AttributeError) as e:
                 return Response(str(e), status=HTTP_400_BAD_REQUEST)
-            register_new_admin_chat_id.apply_async(kwargs={
+            register_new_admin_chat_id.delay(kwargs={
                 'chat_id': chat_id,
                 'username': username,
                 'password': text.split(' : ')[1]
             })
         else:
-            send_message.apply_async(kwargs={'chat_id': chat_id, 'text': text})
+            send_message.delay(kwargs={'chat_id': chat_id, 'text': text})
 
         return Response(status=HTTP_200_OK)
 
