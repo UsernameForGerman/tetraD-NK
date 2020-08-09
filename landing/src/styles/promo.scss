@@ -89,7 +89,7 @@
   }
 }
 
-@media (max-width: 420px), (max-height: 400px) {
+@media (max-width: 420px), (max-height: 420px), (max-width: 1025px) {
   .promo{
     flex-direction: column;
     &-case{
@@ -115,7 +115,7 @@
   }
 }
 
-@media (max-height: 400px) {
+@media (max-height: 420px) {
   .promo{
     flex-direction: row;
     &-case{

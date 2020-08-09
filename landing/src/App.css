@@ -46,3 +46,9 @@
     min-height: 60vh !important;
   }
 }
+
+@media (max-width: 1025px) {
+  .slick-slide{
+    min-height: 40vh !important;
+  }
+}

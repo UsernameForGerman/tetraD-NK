@@ -13,6 +13,9 @@
     position: relative;
     width: 100%;
     margin-bottom: 20vh;
+    &-list{
+      text-align: left !important;
+    }
     &-wrapper{
       display: flex;
       justify-content: space-between;
@@ -136,7 +139,7 @@
         background-color: $accent-orange;
         transition: .3s all linear;
         font-size: 18px;
-        height: 15%;
+        height: 11%;
         &:hover{
           color: $accent-orange;
           background-color: white;
@@ -158,12 +161,34 @@
     }
   }
 }
+@media (max-width: 1025px) {
+  .offer{
+    &-main{
+      &-wrapper{
+        flex-direction: column;
+      }
+    }
+    &-case{
+      &-img{
+        height: 40vh;
+      }
+      &-main{
+        &-btn{
+          height: fit-content;
+          font-size: 1.25em;
+        }
+      }
+    }
+  }
 
-@media (max-width: 420px), (max-height: 400px){
+@media (max-width: 420px), (max-height: 420px){
   .offer{
     margin-bottom: 10vh;
     &-main{
       margin-bottom: 5vh;
+      &-list{
+        white-space: nowrap;
+      }
       &-cta{
         &-input{
           &-wrapper{
@@ -198,6 +223,7 @@
       }
     }
     &-callback-btn{
+      font-size: 1em !important;
       width: 100% !important;
       margin: 0px 0px !important;
     }
@@ -207,7 +233,7 @@
   }
 }
 
-@media (max-height: 400px) {
+@media (max-height: 420px)  {
   .offer{
     &-main{
       &-mac{
@@ -229,20 +255,9 @@
   }
 }
 
-@media (max-width: 1025px) {
-  .offer{
-    &-main{
-      &-wrapper{
-        flex-direction: column;
-      }
-    }
-    &-case{
-      &-main{
-        &-btn{
-          height: 13%;
-        }
-      }
-    }
+
+  .nav-icons{
+    transform: translateY(20vh) !important;
   }
 }
 
