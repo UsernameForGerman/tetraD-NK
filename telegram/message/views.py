@@ -6,7 +6,7 @@ from django.conf import settings
 from requests import Session
 
 from .permissions import TelegramUserPermission
-from api.tasks import send_message
+from api.tasks import send_message, register_new_admin_chat_id
 
 class WebhookView(APIView):
     permission_classes = (TelegramUserPermission, )
@@ -18,9 +18,21 @@ class WebhookView(APIView):
         except (TypeError, KeyError, AttributeError) as e:
             return Response(str(e), status=HTTP_400_BAD_REQUEST)
 
-        print(chat_id)
-
-        send_message.delay(chat_id, text)
+        if text == '/admin':
+            text = 'Write your password in this template:\nPassword : my_password'
+            send_message.delay(chat_id, text)
+        elif 'Password : ' in text:
+            try:
+                username = self.request.data.get('message').get('chat').get('username')
+            except (TypeError, KeyError, AttributeError) as e:
+                return Response(str(e), status=HTTP_400_BAD_REQUEST)
+            register_new_admin_chat_id.delay(
+                chat_id=chat_id,
+                username=username,
+                password=text.split(' : ')[1],
+            )
+        else:
+            send_message.delay(chat_id, text)
 
         return Response(status=HTTP_200_OK)
 

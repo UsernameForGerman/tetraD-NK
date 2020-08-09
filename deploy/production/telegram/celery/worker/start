@@ -5,4 +5,6 @@ set -o errexit
 set -o nounset
 
 
-celery -A core.celery worker -l INFO  -c 4 -Q telegram
+#celery -A core.celery worker -l INFO  -c 4 -Q telegram
+#celery -A core.celery worker -l INFO  -c 4 -Q cms_api
+celery -A core.celery worker -c 4 -l INFO -Q telegram,cms_api
